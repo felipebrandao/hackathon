@@ -25,7 +25,7 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDTO> buscarClientePorId(@PathVariable String id) {
+    public ResponseEntity<ClienteDTO> buscarClientePorId(@PathVariable Long id) {
         ClienteDTO clienteDTO = clienteService.buscarClientePorId(id);
         return ResponseEntity.ok(clienteDTO);
     }

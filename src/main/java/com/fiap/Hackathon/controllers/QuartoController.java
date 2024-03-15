@@ -25,7 +25,7 @@ public class QuartoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QuartoDTO> buscarQuartoPorId(@PathVariable String id) {
+    public ResponseEntity<QuartoDTO> buscarQuartoPorId(@PathVariable Long id) {
         QuartoDTO quartoDTO = quartoService.buscarQuartoPorId(id);
         return ResponseEntity.ok(quartoDTO);
     }

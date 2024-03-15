@@ -20,20 +20,20 @@ public class ItemOpcionalServiceImpl implements ItemOpcionalService {
     @Override
     public ItemOpcionalDTO criarItemOpcional(ItemOpcionalDTO itemOpcionalDTO) {
         ItemOpcional itemOpcional = new ItemOpcional();
-        BeanUtils.copyProperties(itemOpcionalDTO, itemOpcional);
+        //BeanUtils.copyProperties(itemOpcionalDTO, itemOpcional);
         ItemOpcional itemOpcionalSalvo = itemOpcionalRepository.save(itemOpcional);
         ItemOpcionalDTO itemOpcionalSalvoDTO = new ItemOpcionalDTO();
-        BeanUtils.copyProperties(itemOpcionalSalvo, itemOpcionalSalvoDTO);
+        //BeanUtils.copyProperties(itemOpcionalSalvo, itemOpcionalSalvoDTO);
         return itemOpcionalSalvoDTO;
     }
 
     @Override
     public ItemOpcionalDTO atualizarItemOpcional(String id, ItemOpcionalDTO itemOpcionalDTO) {
         ItemOpcional itemOpcional = itemOpcionalRepository.getOne(id);
-        BeanUtils.copyProperties(itemOpcionalDTO, itemOpcional);
+        //BeanUtils.copyProperties(itemOpcionalDTO, itemOpcional);
         ItemOpcional itemOpcionalAtualizado = itemOpcionalRepository.save(itemOpcional);
         ItemOpcionalDTO itemOpcionalAtualizadoDTO = new ItemOpcionalDTO();
-        BeanUtils.copyProperties(itemOpcionalAtualizado, itemOpcionalAtualizadoDTO);
+        //BeanUtils.copyProperties(itemOpcionalAtualizado, itemOpcionalAtualizadoDTO);
         return itemOpcionalAtualizadoDTO;
     }
 
@@ -46,7 +46,7 @@ public class ItemOpcionalServiceImpl implements ItemOpcionalService {
     public ItemOpcionalDTO buscarItemOpcionalPorId(String id) {
         ItemOpcional itemOpcional = itemOpcionalRepository.getOne(id);
         ItemOpcionalDTO itemOpcionalDTO = new ItemOpcionalDTO();
-        BeanUtils.copyProperties(itemOpcional, itemOpcionalDTO);
+        //BeanUtils.copyProperties(itemOpcional, itemOpcionalDTO);
         return itemOpcionalDTO;
     }
 }

@@ -20,20 +20,20 @@ public class ServicoServiceImpl implements ServicoService {
     @Override
     public ServicoDTO criarServico(ServicoDTO servicoDTO) {
         Servico servico = new Servico();
-        BeanUtils.copyProperties(servicoDTO, servico);
+        //BeanUtils.copyProperties(servicoDTO, servico);
         Servico servicoSalvo = servicoRepository.save(servico);
         ServicoDTO servicoSalvoDTO = new ServicoDTO();
-        BeanUtils.copyProperties(servicoSalvo, servicoSalvoDTO);
+        //BeanUtils.copyProperties(servicoSalvo, servicoSalvoDTO);
         return servicoSalvoDTO;
     }
 
     @Override
     public ServicoDTO atualizarServico(String id, ServicoDTO servicoDTO) {
         Servico servico = servicoRepository.getOne(id);
-        BeanUtils.copyProperties(servicoDTO, servico);
+        //BeanUtils.copyProperties(servicoDTO, servico);
         Servico servicoAtualizado = servicoRepository.save(servico);
         ServicoDTO servicoAtualizadoDTO = new ServicoDTO();
-        BeanUtils.copyProperties(servicoAtualizado, servicoAtualizadoDTO);
+        //BeanUtils.copyProperties(servicoAtualizado, servicoAtualizadoDTO);
         return servicoAtualizadoDTO;
     }
 
@@ -46,7 +46,7 @@ public class ServicoServiceImpl implements ServicoService {
     public ServicoDTO buscarServicoPorId(String id) {
         Servico servico = servicoRepository.getOne(id);
         ServicoDTO servicoDTO = new ServicoDTO();
-        BeanUtils.copyProperties(servico, servicoDTO);
+        //BeanUtils.copyProperties(servico, servicoDTO);
         return servicoDTO;
     }
 }

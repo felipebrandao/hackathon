@@ -20,20 +20,20 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     public ReservaDTO criarReserva(ReservaDTO reservaDTO) {
         Reserva reserva = new Reserva();
-        BeanUtils.copyProperties(reservaDTO, reserva);
+        //BeanUtils.copyProperties(reservaDTO, reserva);
         Reserva reservaSalva = reservaRepository.save(reserva);
         ReservaDTO reservaSalvaDTO = new ReservaDTO();
-        BeanUtils.copyProperties(reservaSalva, reservaSalvaDTO);
+        //BeanUtils.copyProperties(reservaSalva, reservaSalvaDTO);
         return reservaSalvaDTO;
     }
 
     @Override
     public ReservaDTO atualizarReserva(String id, ReservaDTO reservaDTO) {
         Reserva reserva = reservaRepository.getOne(id);
-        BeanUtils.copyProperties(reservaDTO, reserva);
+        //BeanUtils.copyProperties(reservaDTO, reserva);
         Reserva reservaAtualizada = reservaRepository.save(reserva);
         ReservaDTO reservaAtualizadaDTO = new ReservaDTO();
-        BeanUtils.copyProperties(reservaAtualizada, reservaAtualizadaDTO);
+        //BeanUtils.copyProperties(reservaAtualizada, reservaAtualizadaDTO);
         return reservaAtualizadaDTO;
     }
 
@@ -46,7 +46,7 @@ public class ReservaServiceImpl implements ReservaService {
     public ReservaDTO buscarReservaPorId(String id) {
         Reserva reserva = reservaRepository.getOne(id);
         ReservaDTO reservaDTO = new ReservaDTO();
-        BeanUtils.copyProperties(reserva, reservaDTO);
+        //BeanUtils.copyProperties(reserva, reservaDTO);
         return reservaDTO;
     }
 }

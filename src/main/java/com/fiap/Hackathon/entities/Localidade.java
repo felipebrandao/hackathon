@@ -20,9 +20,13 @@ public class Localidade {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "endereco")
-    private String endereco;
+    @Column(name = "id_endereco")
+    private Long idEndereco;
 
-    @Column(name = "amenidades")
-    private List<Amenidade> amenidades;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_endereco", referencedColumnName = "id", insertable = false, updatable = false)
+    private Endereco endereco;
+
+    @OneToMany(mappedBy = "localidade", fetch = FetchType.LAZY)
+    private List<Predio> predios;
 }

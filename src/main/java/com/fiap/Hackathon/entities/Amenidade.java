@@ -13,11 +13,16 @@ public class Amenidade {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idAmenidade;
 
     @Column(name = "quantidade")
     private Integer quantidade;
 
     @Column(name = "descricao")
     private String descricao;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "predio", referencedColumnName = "id", insertable = false, updatable = false)
+    private Predio predio;
+
 }

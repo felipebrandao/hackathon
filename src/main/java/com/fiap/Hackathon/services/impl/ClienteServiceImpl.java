@@ -2,6 +2,8 @@ package com.fiap.Hackathon.services.impl;
 
 import com.fiap.Hackathon.dtos.ClienteDTO;
 import com.fiap.Hackathon.entities.Cliente;
+import com.fiap.Hackathon.excepctions.ClienteNaoEncontradoException;
+import com.fiap.Hackathon.mappers.ClienteMapper;
 import com.fiap.Hackathon.repositories.ClienteRepository;
 import com.fiap.Hackathon.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,41 +14,50 @@ public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteRepository clienteRepository;
 
+    private final ClienteMapper clienteMapper;
+
     @Autowired
-    public ClienteServiceImpl(ClienteRepository clienteRepository) {
+    public ClienteServiceImpl(ClienteRepository clienteRepository, ClienteMapper clienteMapper) {
         this.clienteRepository = clienteRepository;
+        this.clienteMapper = clienteMapper;
     }
 
     @Override
     public ClienteDTO criarCliente(ClienteDTO clienteDTO) {
-        Cliente cliente = new Cliente();
-        BeanUtils.copyProperties(clienteDTO, cliente);
-        Cliente clienteSalvo = clienteRepository.save(cliente);
-        ClienteDTO clienteSalvoDTO = new ClienteDTO();
-        BeanUtils.copyProperties(clienteSalvo, clienteSalvoDTO);
-        return clienteSalvoDTO;
+        Cliente clienteSalvo = clienteRepository.save(clienteMapper.toEntity(clienteDTO));
+        return clienteMapper.toDTO(clienteSalvo);
     }
 
     @Override
-    public ClienteDTO atualizarCliente(String id, ClienteDTO clienteDTO) {
-        Cliente cliente = clienteRepository.getOne(id);
-        BeanUtils.copyProperties(clienteDTO, cliente);
-        Cliente clienteAtualizado = clienteRepository.save(cliente);
-        ClienteDTO clienteAtualizadoDTO = new ClienteDTO();
-        BeanUtils.copyProperties(clienteAtualizado, clienteAtualizadoDTO);
-        return clienteAtualizadoDTO;
+    public ClienteDTO atualizarCliente(Long id, ClienteDTO clienteDTO) {
+        Cliente clienteEncontrado = clienteRepository.findByIdAndCPF(id, clienteDTO.getCpf());
+
+        if (clienteEncontrado == null)
+            throw new ClienteNaoEncontradoException("Pessoa com este id: " + id + " e CPF: " + clienteDTO.getCpf() + " não encontrada.");
+
+        Cliente clienteAtualizado = toEntityUpdate(clienteDTO, clienteEncontrado);
+        clienteAtualizado = clienteRepository.save(clienteAtualizado);
+
+        return clienteMapper.toDTO(clienteAtualizado);
+    }
+
+    private Cliente toEntityUpdate(ClienteDTO clienteDTO, Cliente clienteEncontrado) {
+        if (clienteDTO.getNomeCompleto() != null) clienteEncontrado.setNomeCompleto(clienteDTO.getNomeCompleto());
+        if (clienteDTO.getDataNascimento() != null) clienteEncontrado.setDataNascimento(clienteDTO.getDataNascimento());
+        return clienteEncontrado;
     }
 
     @Override
-    public void deletarCliente(String id) {
-        clienteRepository.deleteById(id);
+    public void deletarCliente(Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new ClienteNaoEncontradoException("Cliente com ID " + id + " não encontrada."));
+        clienteRepository.delete(cliente);
     }
 
     @Override
-    public ClienteDTO buscarClientePorId(String id) {
-        Cliente cliente = clienteRepository.getOne(id);
-        ClienteDTO clienteDTO = new ClienteDTO();
-        BeanUtils.copyProperties(cliente, clienteDTO);
-        return clienteDTO;
+    public ClienteDTO buscarClientePorId(Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new ClienteNaoEncontradoException("Cliente com ID " + id + " não encontrada."));
+        return clienteMapper.toDTO(cliente);
     }
 }

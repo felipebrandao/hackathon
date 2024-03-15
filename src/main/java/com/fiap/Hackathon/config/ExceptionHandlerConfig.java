@@ -2,8 +2,7 @@ package com.fiap.Hackathon.config;
 
 import com.fiap.Hackathon.dtos.ErroDeFormularioDTO;
 import com.fiap.Hackathon.dtos.ErrorDTO;
-import lombok.Getter;
-import lombok.Setter;
+import com.fiap.Hackathon.excepctions.HackatonException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -27,6 +26,12 @@ import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 @Slf4j
 public class ExceptionHandlerConfig {
 
+    @ExceptionHandler(HackatonException.class)
+    public ResponseEntity<ErrorDTO> handleTechChallengeException(HackatonException ex) {
+        log.error("Erro na requisição, erro: ", ex);
+        ErrorDTO error = new ErrorDTO(Instant.now(), HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<List<ErroDeFormularioDTO>> handleException(MethodArgumentNotValidException ex) {

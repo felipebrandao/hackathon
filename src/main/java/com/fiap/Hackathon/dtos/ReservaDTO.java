@@ -1,5 +1,7 @@
 package com.fiap.Hackathon.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,11 +15,27 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class ReservaDTO {
-    private String id;
-    private String idCliente;
-    private List<String> idQuartos;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Long id;
+
+    @JsonProperty
+    private Long idCliente;
+
+    @JsonProperty
+    private List<QuartoReservadoDTO> quartos;
+
+    @JsonProperty
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataEntrada;
+
+    @JsonProperty
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataSaida;
-    private List<String> idServicos;
-    private List<String> idItensOpcionais;
+
+    @JsonProperty
+    private List<ServicoReservadoDTO> servicos;
+
+    @JsonProperty
+    private List<ItemOpcionalReservadoDTO> itensOpcionais;
 }
