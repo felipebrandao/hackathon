@@ -7,4 +7,3 @@ COPY target/hackathon.jar /app/hackathon.jar
 COPY init-db.sql /docker-entrypoint-initdb.d/
 
 CMD ["java", "-jar", "/app/hackathon.jar"]
-
