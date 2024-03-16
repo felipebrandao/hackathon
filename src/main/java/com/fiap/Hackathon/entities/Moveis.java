@@ -1,6 +1,8 @@
 package com.fiap.Hackathon.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "moveis")
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
+@Builder
 public class Moveis {
 
     @Id
@@ -29,4 +33,5 @@ public class Moveis {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_quarto", referencedColumnName = "id", insertable = false, updatable = false)
     private Quarto moveisQuarto;
+
 }

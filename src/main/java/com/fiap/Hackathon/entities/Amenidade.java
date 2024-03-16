@@ -21,8 +21,11 @@ public class Amenidade {
     @Column(name = "descricao")
     private String descricao;
 
+    @Column(name = "id_predio")
+    private Long idPredio;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "predio", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_predio", referencedColumnName = "id", insertable = false, updatable = false)
     private Predio predio;
 
 }

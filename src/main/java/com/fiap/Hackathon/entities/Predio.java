@@ -30,4 +30,7 @@ public class Predio {
     @OneToMany(mappedBy = "predio", fetch = FetchType.LAZY)
     private List<Amenidade> amenidades;
 
+    @OneToMany(mappedBy = "predioQuarto", fetch = FetchType.LAZY)
+    private List<Quarto> predioQuartos;
+
 }

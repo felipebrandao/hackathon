@@ -42,4 +42,10 @@ public class Reserva {
     @OneToMany(mappedBy = "reservaItemOpcional", fetch = FetchType.LAZY)
     private List<ItemOpcionalReservado> itemOpcionaisReserva;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id", insertable = false, updatable = false)
+    private Cliente clienteReserva;
+
+
+
 }

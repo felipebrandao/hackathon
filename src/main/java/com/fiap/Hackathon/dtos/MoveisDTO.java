@@ -13,10 +13,15 @@ import lombok.NoArgsConstructor;
 public class MoveisDTO {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Long idMoveis;
+    private Long id;
 
+    @JsonProperty
+    private Long idQuarto;
+
+    @JsonProperty
     private String descricao;
 
+    @JsonProperty
     private Integer quantidade;
 
 }

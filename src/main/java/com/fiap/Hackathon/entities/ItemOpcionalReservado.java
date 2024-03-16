@@ -34,7 +34,7 @@ public class ItemOpcionalReservado {
     private Reserva reservaItemOpcional;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_servico", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_item_opcional", referencedColumnName = "id", insertable = false, updatable = false)
     private ItemOpcional itemOpcionalReservado;
 }
 

@@ -13,9 +13,14 @@ import lombok.NoArgsConstructor;
 public class CamaDTO {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Long idCama;
+    private Long id;
 
+    @JsonProperty
+    private Long idQuarto;
+
+    @JsonProperty
     private String descricao;
 
+    @JsonProperty
     private Integer quantidade;
 }

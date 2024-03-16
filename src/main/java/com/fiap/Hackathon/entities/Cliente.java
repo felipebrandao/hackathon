@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "cliente")
@@ -40,6 +41,9 @@ public class Cliente {
 
     @Column(name = "email")
     private String email;
+
+    @OneToMany(mappedBy = "clienteReserva", fetch = FetchType.LAZY)
+    private List<Reserva> ReservaCliente;
 
     public Cliente(String paisOrigem, String cpf, String passaporte, String nomeCompleto, LocalDate dataNascimento, String enderecoPaisOrigem, String telefone, String email) {
         this.paisOrigem = paisOrigem;

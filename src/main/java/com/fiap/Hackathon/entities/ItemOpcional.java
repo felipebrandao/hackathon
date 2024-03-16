@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "servico")
+@Table(name = "item_opcional")
 @NoArgsConstructor
 @Data
 public class ItemOpcional {

@@ -6,6 +6,8 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface MoveisMapper {
+
     MoveisDTO toDTO(Moveis moveis);
+
     Moveis toEntity(MoveisDTO moveisDTO);
 }

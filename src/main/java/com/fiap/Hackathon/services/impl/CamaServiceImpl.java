@@ -25,8 +25,8 @@ public class CamaServiceImpl implements CamaService {
 
     @Override
     public CamaDTO cadastrarCama(CamaDTO camaDTO) {
-        Cama cama = camaRepository.save(camaMapper.toEntity(camaDTO));
-        return camaMapper.toDTO(cama);
+        Cama camaSalva = camaRepository.save(camaMapper.toEntity(camaDTO));
+        return camaMapper.toDTO(camaSalva);
     }
 
     @Override

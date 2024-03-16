@@ -1,6 +1,7 @@
 package com.fiap.Hackathon.services;
 
 import com.fiap.Hackathon.dtos.CamaDTO;
+import com.fiap.Hackathon.entities.Cama;
 
 import java.util.List;
 
