@@ -1,5 +1,6 @@
 package com.fiap.Hackathon.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,7 @@ public class ServicoReservadoDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    @JsonProperty
+    @JsonIgnore
     private Long idReserva;
 
     @JsonProperty
